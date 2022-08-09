@@ -12,10 +12,15 @@ import {
     ModalFooter,
     ModalBody,
     ModalCloseButton,
+    Checkbox,
+    Input,
 } from '@chakra-ui/react'
+import { randomTodo } from '../util/random'
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(false)
+    const [useDueDate, setUseDueDate] = useState(false)
+    const [randTodo, setRandTodo] = useState(randomTodo())
 
     function openModal() {
         setIsOpen(true)
@@ -23,17 +28,38 @@ export default function Home() {
 
     function handleModalClose() {
         setIsOpen(false)
+        setRandTodo(randomTodo())
     }
 
     return (
         <Box>
             <Modal isOpen={isOpen} onClose={handleModalClose}>
                 <ModalOverlay />
-                <ModalContent>
+                <ModalContent bg='gray.800'>
                     <ModalHeader>Create todo</ModalHeader>
                     <ModalCloseButton />
                     <ModalBody>
-                        <Text>Hello world!</Text>
+                        <Box mb={5}>
+                            <Text as='label' for='description' display='block' mb='6px'>
+                                Description
+                            </Text>
+                            <Input placeholder={randTodo} name='description' />
+                        </Box>
+                        <Box>
+                            <Box display='flex' alignItems='center' gap='10px'>
+                                <Text>Due date</Text>
+                                <Checkbox
+                                    colorScheme='purple'
+                                    size='lg'
+                                    onChange={(e) => setUseDueDate(e.target.checked)}
+                                />
+                            </Box>
+                            {useDueDate && (
+                                <Box>
+                                    <Text>todo lol</Text>
+                                </Box>
+                            )}
+                        </Box>
                     </ModalBody>
                     <ModalFooter>
                         <Button variant='ghost' mr={3} onClick={handleModalClose}>
