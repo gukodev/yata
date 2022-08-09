@@ -57,7 +57,7 @@ export default function Home() {
                     borderColor='gray.800'
                 >
                     <Text variant='muted'>
-                        You have in total 0 todos, where 0 are done and 0 are undone.
+                        📝 You have in total 0 todos, where 0 are done and 0 are undone.
                     </Text>
                     <Button
                         colorScheme='purple'
