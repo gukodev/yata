@@ -2,6 +2,8 @@
 
 **Y**et **A**nother **T**odo **A**pp made with **Next.js** and **Chakra UI**. It uses the local storage to store the todos.
 
+**(project currently in development)**
+
 ## 👾 About
 
 This project was made for learning purposes ~~(and not because I was bored)~~. Feel free to fork, contribute or even just play around with it.
