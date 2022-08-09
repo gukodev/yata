@@ -12,8 +12,8 @@ export default function Home() {
                     alignItems='center'
                     justifyContent='space-between'
                     py={5}
-                    borderBottom='1px solid'
-                    borderTop='1px solid'
+                    borderBottom='2px solid'
+                    borderTop='2px solid'
                     borderColor='gray.800'
                 >
                     <Text variant='muted'>
