@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import {
     Box,
     Container,
@@ -16,6 +16,7 @@ import {
     Input,
 } from '@chakra-ui/react'
 import { randomTodo } from '../util/random'
+import DateInput from '../components/DateInput'
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(false)
@@ -28,6 +29,7 @@ export default function Home() {
 
     function handleModalClose() {
         setIsOpen(false)
+        setUseDueDate(false)
         setRandTodo(randomTodo())
     }
 
@@ -40,23 +42,63 @@ export default function Home() {
                     <ModalCloseButton />
                     <ModalBody>
                         <Box mb={5}>
-                            <Text as='label' for='todo' display='block' mb='6px'>
+                            <Text as='label' htmlFor='todo' display='block' mb='6px'>
                                 Description
                             </Text>
                             <Input placeholder={randTodo} name='todo' />
                         </Box>
                         <Box>
-                            <Box display='flex' alignItems='center' gap='10px'>
+                            <Box display='flex' alignItems='center' gap='10px' mb={3}>
                                 <Text>Due date</Text>
                                 <Checkbox
                                     colorScheme='purple'
                                     size='lg'
-                                    onChange={(e) => setUseDueDate(e.target.checked)}
+                                    onChange={() => setUseDueDate(!useDueDate)}
                                 />
                             </Box>
                             {useDueDate && (
                                 <Box>
-                                    <Text>todo lol</Text>
+                                    <Box
+                                        display='flex'
+                                        alignItems='center'
+                                        justifyContent='space-between'
+                                        gap='8px'
+                                    >
+                                        <DateInput
+                                            text='Month'
+                                            name='month'
+                                            placeholder={new Date().getMonth() + 1}
+                                        />
+                                        <DateInput
+                                            text='Day'
+                                            name='day'
+                                            placeholder={new Date().getDate()}
+                                        />
+                                        <DateInput
+                                            text='Year'
+                                            name='year'
+                                            placeholder={new Date().getFullYear()}
+                                        />
+                                    </Box>
+                                    <Box
+                                        mt={3}
+                                        display='flex'
+                                        alignItems='center'
+                                        justifyContent='space-between'
+                                        gap='8px'
+                                    >
+                                        <DateInput
+                                            text='Hours'
+                                            name='hours'
+                                            placeholder={new Date().getHours()}
+                                        />
+                                        <DateInput
+                                            text='Minutes'
+                                            name='minutes'
+                                            placeholder={new Date().getMinutes()}
+                                        />
+                                        <DateInput text='Seconds' name='seconds' placeholder={0} />
+                                    </Box>
                                 </Box>
                             )}
                         </Box>
