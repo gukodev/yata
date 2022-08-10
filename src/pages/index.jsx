@@ -40,10 +40,10 @@ export default function Home() {
                     <ModalCloseButton />
                     <ModalBody>
                         <Box mb={5}>
-                            <Text as='label' for='description' display='block' mb='6px'>
+                            <Text as='label' for='todo' display='block' mb='6px'>
                                 Description
                             </Text>
-                            <Input placeholder={randTodo} name='description' />
+                            <Input placeholder={randTodo} name='todo' />
                         </Box>
                         <Box>
                             <Box display='flex' alignItems='center' gap='10px'>
