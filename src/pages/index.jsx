@@ -23,6 +23,12 @@ export default function Home() {
     const [useDueDate, setUseDueDate] = useState(false)
     const [randTodo, setRandTodo] = useState(randomTodo())
 
+    const monthRef = useRef(null)
+    const dayRef = useRef(null)
+    const yearRef = useRef(null)
+    const hoursRef = useRef(null)
+    const minutesRef = useRef(null)
+
     function openModal() {
         setIsOpen(true)
     }
@@ -31,6 +37,16 @@ export default function Home() {
         setIsOpen(false)
         setUseDueDate(false)
         setRandTodo(randomTodo())
+    }
+
+    function handleTodoCreate() {
+        const month = monthRef.current?.value
+        const day = dayRef.current?.value
+        const year = yearRef.current?.value
+        const hours = hoursRef.current?.value
+        const minutes = minutesRef.current?.value
+
+        // todo
     }
 
     return (
@@ -67,16 +83,19 @@ export default function Home() {
                                         <DateInput
                                             text='Month'
                                             name='month'
+                                            ref={monthRef}
                                             placeholder={new Date().getMonth() + 1}
                                         />
                                         <DateInput
                                             text='Day'
                                             name='day'
+                                            ref={dayRef}
                                             placeholder={new Date().getDate()}
                                         />
                                         <DateInput
                                             text='Year'
                                             name='year'
+                                            ref={yearRef}
                                             placeholder={new Date().getFullYear()}
                                         />
                                     </Box>
@@ -90,11 +109,13 @@ export default function Home() {
                                         <DateInput
                                             text='Hours'
                                             name='hours'
+                                            ref={hoursRef}
                                             placeholder={new Date().getHours()}
                                         />
                                         <DateInput
                                             text='Minutes'
                                             name='minutes'
+                                            ref={minutesRef}
                                             placeholder={new Date().getMinutes()}
                                         />
                                         <DateInput text='Seconds' name='seconds' placeholder={0} />
@@ -107,7 +128,9 @@ export default function Home() {
                         <Button variant='ghost' mr={3} onClick={handleModalClose}>
                             Cancel
                         </Button>
-                        <Button colorScheme='purple'>Create</Button>
+                        <Button colorScheme='purple' onClick={handleTodoCreate}>
+                            Create
+                        </Button>
                     </ModalFooter>
                 </ModalContent>
             </Modal>
