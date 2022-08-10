@@ -3,7 +3,7 @@ import { trailingZero } from '../util/format'
 
 export default function DateInput(props) {
     return (
-        <Box w='100%'>
+        <Box w='100%' mb={[2, 0]}>
             <Text as='label' htmlFor={props.name} display='block' mb='3px' variant='muted'>
                 {props.text}
             </Text>

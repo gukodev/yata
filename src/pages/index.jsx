@@ -59,7 +59,7 @@ export default function Home() {
                             {useDueDate && (
                                 <Box>
                                     <Box
-                                        display='flex'
+                                        display={['block', 'flex']}
                                         alignItems='center'
                                         justifyContent='space-between'
                                         gap='8px'
@@ -82,7 +82,7 @@ export default function Home() {
                                     </Box>
                                     <Box
                                         mt={3}
-                                        display='flex'
+                                        display={['block', 'flex']}
                                         alignItems='center'
                                         justifyContent='space-between'
                                         gap='8px'
