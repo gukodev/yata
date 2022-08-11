@@ -19,3 +19,10 @@ const TODOS = [
 export function randomTodo() {
     return TODOS[Math.floor(Math.random() * TODOS.length)]
 }
+
+export function randomId() {
+    const bytes = new Uint8Array(3)
+    window.crypto.getRandomValues(bytes)
+    const hex = [...bytes].map((b) => b.toString(16).padStart(2, '0')).join('')
+    return hex
+}
