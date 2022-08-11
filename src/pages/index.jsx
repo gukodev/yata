@@ -16,7 +16,7 @@ import {
     Input,
     useToast,
 } from '@chakra-ui/react'
-import { randomTodo } from '../util/random'
+import { randomId, randomTodo } from '../util/random'
 import DateInput from '../components/DateInput'
 import {
     datePassed,
@@ -133,7 +133,9 @@ export default function Home() {
         }
 
         const data = {
+            id: randomId(),
             description: todo,
+            complete: false,
             dueDate: dueDate.toISOString(),
             createdAt: new Date().toISOString(),
         }
