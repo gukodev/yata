@@ -49,6 +49,10 @@ export const theme = extendTheme({
             body: {
                 background: 'gray.900',
             },
+            '::selection': {
+                background: 'purple.300',
+                color: 'white',
+            },
         }),
     },
 })
