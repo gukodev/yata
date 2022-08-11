@@ -27,11 +27,13 @@ import {
     validateHour,
     validateMonth,
 } from '../util/validate'
+import { useStorageAPI } from '../hooks/Storage'
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(false)
     const [useDueDate, setUseDueDate] = useState(false)
     const [randTodo, setRandTodo] = useState(randomTodo())
+    const StorageAPI = useStorageAPI()
     const toast = useToast()
 
     const monthRef = useRef(null)
@@ -41,6 +43,11 @@ export default function Home() {
     const minutesRef = useRef(null)
     const secondsRef = useRef(null)
     const todoRef = useRef(null)
+
+    useEffect(() => {
+        window.storageAPI = StorageAPI
+        console.log(StorageAPI)
+    })
 
     function openModal() {
         setIsOpen(true)
@@ -132,15 +139,16 @@ export default function Home() {
             dueDate = date
         }
 
-        const data = {
+        let data = {
             id: randomId(),
             description: todo,
             complete: false,
-            dueDate: dueDate.toISOString(),
             createdAt: new Date().toISOString(),
         }
 
-        console.log(data)
+        if (useDueDate) data.dueDate = dueDate.toISOString()
+
+        StorageAPI.addTodo(data)
     }
 
     return (
@@ -242,6 +250,7 @@ export default function Home() {
                     alignItems='center'
                     justifyContent='space-between'
                     py={5}
+                    mb={5}
                     borderBottom='2px solid'
                     borderTop='2px solid'
                     borderColor='gray.800'
@@ -257,6 +266,9 @@ export default function Home() {
                     >
                         Create new todo
                     </Button>
+                </Box>
+                <Box>
+                    <code>{JSON.stringify(StorageAPI.getTodos())}</code>
                 </Box>
             </Container>
         </Box>
