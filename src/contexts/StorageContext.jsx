@@ -1,4 +1,5 @@
 import { createContext, useEffect, useState } from 'react'
+import { filterByMostRecent } from '../util/format'
 
 export const StorageContext = createContext()
 
@@ -15,7 +16,17 @@ export function StorageContextProvider({ children }) {
     }, [todos])
 
     const StorageAPI = {
-        getTodos: () => todos,
+        getTodos: () => {
+            return filterByMostRecent(todos, 'createdAt')
+        },
+        getTodosWithoutDueDate: () => {
+            const items = todos.filter((todo) => !todo.dueDate)
+            return filterByMostRecent(items, 'createdAt')
+        },
+        getTodosWithDueDate: () => {
+            const items = todos.filter((item) => item.dueDate)
+            return filterByMostRecent(items, 'dueDate').reverse()
+        },
         addTodo: (todo) => {
             setTodos([...todos, todo])
         },
