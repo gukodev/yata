@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react'
+import { useRef, useState } from 'react'
 import {
     Box,
     Container,
@@ -28,6 +28,7 @@ import {
     validateMonth,
 } from '../util/validate'
 import { useStorageAPI } from '../hooks/Storage'
+import Todo from '../components/Todo'
 
 export default function Home() {
     const [isOpen, setIsOpen] = useState(false)
@@ -43,11 +44,6 @@ export default function Home() {
     const minutesRef = useRef(null)
     const secondsRef = useRef(null)
     const todoRef = useRef(null)
-
-    useEffect(() => {
-        window.storageAPI = StorageAPI
-        console.log(StorageAPI)
-    })
 
     function openModal() {
         setIsOpen(true)
@@ -149,6 +145,7 @@ export default function Home() {
         if (useDueDate) data.dueDate = dueDate.toISOString()
 
         StorageAPI.addTodo(data)
+        handleModalClose()
     }
 
     return (
@@ -268,7 +265,16 @@ export default function Home() {
                     </Button>
                 </Box>
                 <Box>
-                    <code>{JSON.stringify(StorageAPI.getTodos())}</code>
+                    <Box>
+                        {StorageAPI.getTodosWithDueDate().map((data) => {
+                            return <Todo data={data} key={data.id} />
+                        })}
+                    </Box>
+                    <Box mt={8}>
+                        {StorageAPI.getTodosWithoutDueDate().map((data) => {
+                            return <Todo data={data} key={data.id} />
+                        })}
+                    </Box>
                 </Box>
             </Container>
         </Box>
